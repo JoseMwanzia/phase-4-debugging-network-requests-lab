@@ -1,5 +1,6 @@
 class ToysController < ApplicationController
   wrap_parameters format: []
+rescue_from ActiveRecord::RecordInvalid, with: :render_not_found
 
   def index
     toys = Toy.all
@@ -28,4 +29,7 @@ class ToysController < ApplicationController
     params.permit(:name, :image, :likes)
   end
 
+  def render_not_found
+    render json: { error: "Toy not found" }, status: :not_found
+  end
 end
