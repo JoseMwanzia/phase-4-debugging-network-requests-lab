@@ -19,7 +19,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_invalid
   end
 
   def destroy
-    toy = Toy.find_by(id: params[:id])
+    toy = Toy.find(params[:id])
     toy.destroy
     head :no_content
   end
