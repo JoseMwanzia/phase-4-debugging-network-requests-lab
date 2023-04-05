@@ -14,7 +14,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_invalid
   end
 
   def update
-    toy = Toy.find_by(id: params[:id])
+    toy = Toy.find(params[:id])
     toy.update(toy_params)
   end
 
@@ -31,7 +31,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_invalid
   end
   
   def toy_params
-    params.permit(:name, :image, :likes)
+    params.permit(:id, :name, :image, :likes)
   end
 
   def render_not_found
